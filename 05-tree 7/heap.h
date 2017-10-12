@@ -5,6 +5,7 @@
 
 struct MinHeap 
 {
+    int capacity;
     int heap_size;
     ElementType *HeapArr;
 }
