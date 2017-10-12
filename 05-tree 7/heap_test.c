@@ -2,23 +2,12 @@
 #include <stdlib.h>
 #include "heap.h"
 
-#define File_Name ".//test.txt"
-
-
 
 void read_line(int arr[], int read_size, FILE *fp)
 {
     int i = 0;
-    if(fp) {
-        for(i = 0; i < read_size; i++) {
-            fscanf(fp, "%d", arr[i]);
-        }
-    }
-    else {
-        for(i = 0; i < read_size; i++) {
-            fscanf(stdin, "%d", arr[i]);
-        }
-    }
+    for(i = 0; i < read_size; i++)
+        fscanf(fp, "%d", &arr[i]);
 }
 
 void print_line(int arr[], int size)
@@ -30,7 +19,18 @@ void print_line(int arr[], int size)
     printf("%d\n", arr[size-1]);
 }
 
-void test_main()
+void print_path(MinHeapPtr p_heap, int index)
+{
+    int i = 0;
+
+    for(i = index; i > 0 ; i = i/2) {
+        printf("%d", p_heap->HeapArr[i]);
+        if(i > 1) printf(" ");
+        else printf("\n");
+    }
+}
+
+int main()
 {
     FILE *fp = stdin;
     int ElementNum_N = 0;
@@ -42,41 +42,45 @@ void test_main()
 
     MinHeapPtr p_heap = NULL;
 
-    fp = fopen(File_Name, "ro");
+    fp = fopen(".\\test.txt", "r");
 
-    if(!fp)    printf("No file\n");
+    if(!fp)  {
+        printf("No file\n");
+        return -1;
+    }
 
     fscanf(fp, "%d", &ElementNum_N);
-    fscanf(fp, "%d", PrintNum_M);
+    fscanf(fp, "%d", &PrintNum_M);
 
     data_arr = (int *)malloc(ElementNum_N * sizeof(int));
     index_arr = (int *)malloc(PrintNum_M * sizeof(int));
 
-    readline(data_arr, ElementNum_N, fp);
-    printline(data_arr, ElementNum_N);
-    
-    readline(index_arr, PrintNum_M, fp);
-    printline(index_arr, PrintNum_M);
+    read_line(data_arr, ElementNum_N, fp);
+    print_line(data_arr, ElementNum_N);
 
-    /*完成功能*/
+    read_line(index_arr, PrintNum_M, fp);
+    print_line(index_arr, PrintNum_M);
+
+    /**/
 
     p_heap = HeapInit(ElementNum_N);
-    for(i = 0; i< ElementNum_N, i++) {
+    for(i = 0; i< ElementNum_N; i++) {
         HeapInsert(p_heap, data_arr[i]);
     }
-    for(i = 0; i < printNum_M; i++) {
-        printPath(p_heap, index_arr[i]);
+
+    print_line(p_heap->HeapArr, p_heap->heap_size);
+
+    for(i = 0; i < PrintNum_M; i++) {
+        print_path(p_heap, index_arr[i]);
     }
 
+    free(data_arr);
+    free(index_arr);
+    free(p_heap->HeapArr);
+    free(p_heap);
+
+    fclose(fp);
+
+    return 0;
 }
 
-void print_path(MinHeapPtr p_heap, int index)
-{
-    int i = 0;
-    
-    for(i = index; i > 0 ; i = i/2) {
-        printf("%d", p_heap->heapArr[i]);
-        if(i > 1) printf(" ");
-        else printf("\n");
-    }
-}
