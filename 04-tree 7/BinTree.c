@@ -19,21 +19,12 @@ BinTree Insert( BinTree BST, ElementType X )
     new_node->Right = NULL;
     new_node->Data = X;
 
-    if(!BinTree) {
+    if(!BST) {
         return new_node;
     }
 
     while ( X != pos->Data ) {
-        if(X>pos->Data) {
-            if(pos->Left) {
-                pos = pos->Left;
-                continue;
-            }
-            else {
-                pos->Left = new_node;
-                break;
-            }
-        } else {
+        if(X > pos->Data) {
             if(pos->Right) {
                 pos = pos->Right;
                 continue;
@@ -42,29 +33,18 @@ BinTree Insert( BinTree BST, ElementType X )
                 pos->Right = new_node;
                 break;
             }
+        } else {
+            if(pos->Left) {
+                pos = pos->Left;
+                continue;
+            }
+            else {
+                pos->Left = new_node;
+                break;
+            }
         }
     }
 
-    return BST;
-    /*
-        while (X > pos->Data) {
-        if(pos->Left!= NULL)
-            pos = pos->Left;
-        else{
-            pos->Left  = new_node;
-            break;
-        }
-    }
-
-    while (X < pos->Data) {
-        if(pos->Right != NULL)
-            pos = pos->Right;
-        else {
-            pos->Right = new_node;
-            break;
-        }
-    }
-    */
 }
 
 BinTree Delete( BinTree BST, ElementType X )
@@ -81,7 +61,7 @@ BinTree Delete( BinTree BST, ElementType X )
     pos = BST;
     father = pos;
 
-    while(pos!=NULL || pos->Data!=X) {
+    while(pos->Data!=X) {
         if(X < pos->Data) {
             father = pos;
             pos = pos->Left;
@@ -89,6 +69,9 @@ BinTree Delete( BinTree BST, ElementType X )
             father = pos;
             pos = pos->Right;
         }
+
+        if(!pos)
+            break;
     }
 
     if(!pos) {
@@ -116,11 +99,23 @@ BinTree Delete( BinTree BST, ElementType X )
 
     /*单边树*/
     if(pos->Left == NULL || pos->Right == NULL) {
+
+		/*树根*/
+		if(pos == BST) {
+			if(pos->Left) 
+				BST = pos->Left;
+			else
+				BST = pos->Right;
+
+			free(pos);
+			return BST;
+		}
+
         if(pos->Data < father->Data) {
              if(pos->Left) father->Left = pos->Left;
              else father->Left = pos->Right;
         }
-        else {
+		else {
              if(pos->Left) father->Right = pos->Left;
              else father->Right = pos->Right;
         }
@@ -189,5 +184,25 @@ Position FindMax( BinTree BST )
     }
 
     return pos;
+}
+
+
+void PreorderTraversal( BinTree BT )/* 先序遍历，由裁判实现，细节不表 */
+{
+    if(BT) {
+        printf("%d ",BT->Data);
+        PreorderTraversal( BT->Left );
+        PreorderTraversal( BT->Right );
+    }
+}
+
+
+void InorderTraversal( BinTree BT ) /* 中序遍历，由裁判实现，细节不表 */
+{
+    if(BT) {
+        InorderTraversal(BT->Left) ;
+        printf("%d ", BT->Data);
+        InorderTraversal( BT->Right );
+    }
 }
 
