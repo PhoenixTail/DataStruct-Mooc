@@ -166,11 +166,23 @@ BinTree Delete( BinTree BST, ElementType X )
 
     /*µ¥±ßÊ÷*/
     if(pos->Left == NULL || pos->Right == NULL) {
+
+		/*Ê÷¸ù*/
+		if(pos == BST) {
+			if(pos->Left) 
+				BST = pos->Left;
+			else
+				BST = pos->Right;
+
+			free(pos);
+			return BST;
+		}
+
         if(pos->Data < father->Data) {
              if(pos->Left) father->Left = pos->Left;
              else father->Left = pos->Right;
         }
-        else {
+		else {
              if(pos->Left) father->Right = pos->Left;
              else father->Right = pos->Right;
         }
