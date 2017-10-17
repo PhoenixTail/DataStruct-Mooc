@@ -41,5 +41,6 @@ typedef struct Graph_Table * PtrGphT;
 PtrGphM Create_Graph_Matrix(int vertex_num);
 void Delete_Graph_Matrix(PtrGphM p_graph);
 void Graph_Matrix_InsertEdge(PtrGphM p_graph, PtrEdge p_edge);
+void Graph_Matrix_DFS(PtrGphM p_graph, int V);
 
 #endif // __GRAPH_H__

@@ -12,16 +12,27 @@ void Print_GraphM(PtrGphM p_graph)
     }
 }
 
+void Print_GraphM_Visit(PtrGphM p_graph)
+{
+	int V;
+	for(V = 0; V < p_graph->Num_V; V++) 
+		printf("%d ", p_graph->V_Data[V]);
+	printf("\n");
+}
+
 void test_graph()
 {
     PtrGphM p_graph = NULL;
     struct Edge E;
+	int input_NVertex;
     int input_NEdge;
     int i;
 
     FILE *fp = stdin;
 
-    p_graph = Create_Graph_Matrix(5);
+	fscanf(fp, "%d", &input_NVertex);
+
+    p_graph = Create_Graph_Matrix(input_NVertex);
 
 
     fscanf(fp, "%d", &input_NEdge);
@@ -36,6 +47,9 @@ void test_graph()
     }
 
     Print_GraphM(p_graph);
+	Print_GraphM_Visit(p_graph);
+
+    Graph_Matrix_DFS(p_graph,0);
 
     if(fp != stdin)
         fclose(fp);
