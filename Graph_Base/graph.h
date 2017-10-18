@@ -42,5 +42,9 @@ PtrGphM Create_Graph_Matrix(int vertex_num);
 void Delete_Graph_Matrix(PtrGphM p_graph);
 void Graph_Matrix_InsertEdge(PtrGphM p_graph, PtrEdge p_edge);
 void Graph_Matrix_DFS(PtrGphM p_graph, int V);
+void Graph_Matrix_Clear_Visit(PtrGphM p_graph);
+void Graph_Matrix_DFS_Unlink(PtrGphM p_graph);
+void Graph_Matrix_BFS(PtrGphM p_graph, int V);
+void Graph_Matrix_BFS_Unlink(PtrGphM p_graph);
 
 #endif // __GRAPH_H__

@@ -30,6 +30,8 @@ void test_graph()
 
     FILE *fp = stdin;
 
+    if(!(fp = fopen(".//test.txt","r"))) return;
+
 	fscanf(fp, "%d", &input_NVertex);
 
     p_graph = Create_Graph_Matrix(input_NVertex);
@@ -47,9 +49,27 @@ void test_graph()
     }
 
     Print_GraphM(p_graph);
-	Print_GraphM_Visit(p_graph);
-
+    Print_GraphM_Visit(p_graph);
+    
     Graph_Matrix_DFS(p_graph,0);
+    
+    printf("\nDFS once end\n");
+    Graph_Matrix_Clear_Visit(p_graph);
+    
+	Print_GraphM_Visit(p_graph);
+    Graph_Matrix_DFS_Unlink(p_graph);
+	printf("\nDFS end\n");
+
+    
+	Graph_Matrix_Clear_Visit(p_graph);
+    Graph_Matrix_BFS(p_graph,0);
+	printf("\nBFS once end\n");
+    Graph_Matrix_Clear_Visit(p_graph);
+	Graph_Matrix_BFS_Unlink(p_graph);
+	printf("\nBFS end\n");
+
+
+    Delete_Graph_Matrix(p_graph);
 
     if(fp != stdin)
         fclose(fp);
