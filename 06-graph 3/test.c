@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "graph.h"
 
+int OneNode_SixDegree_BFS(PtrGraphTbl p_graph, int V);
+
 void Print_AdjNode(PtrVertex p_vertex)
 {
     PtrAdjNode tmp = p_vertex->next;
@@ -26,8 +28,8 @@ void PrintGraph(PtrGraphTbl p_graph)
 void PrintVisit(PtrGraphTbl p_graph)
 {
     int i = 0;
-    for( i = 1; i <= p_graph->Num_V; i++);
-        printf("Vertix[i]:%d ", p_graph->Vertex[i].data);
+    for( i = 1; i <= p_graph->Num_V; i++)
+        printf("Vertix[%d]:%d \n", i,p_graph->Vertex[i].data);
 }
 
 void test_main()
@@ -36,9 +38,10 @@ void test_main()
     int vertex_num = 0;
     int edge_num = 0;
     int i = 0;
+    int six_count = 0;
     struct Graph_Edge edge;
-	PtrGraphTbl p_graph = NULL; 
-    
+	PtrGraphTbl p_graph = NULL;
+
 	fp = fopen(".//test.txt","r");
 	if(!fp) return;
 
@@ -58,9 +61,19 @@ void test_main()
             return;
         }
     }
-    
+
     PrintGraph(p_graph);
     PrintVisit(p_graph);
+
+    six_count = OneNode_SixDegree_BFS(p_graph, 1);
+    GraphTable_ClearVisit(p_graph);
+
+    for( i = 1; i <= vertex_num; i++ ) {
+        six_count = OneNode_SixDegree_BFS(p_graph, i);
+        printf("\nVertex[%d]:%f\n", i, (double)six_count/(double)vertex_num);
+        GraphTable_ClearVisit(p_graph);
+    }
+
 
     DeleteGraphTable(p_graph);
     if(fp != stdin)
