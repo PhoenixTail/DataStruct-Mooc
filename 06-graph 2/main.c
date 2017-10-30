@@ -3,7 +3,7 @@
 
 int main()
 {
-    printf("Hello world!\n");
+    test_main();
     return 0;
 }
 
@@ -12,7 +12,10 @@ struct Position
 {
     int x_pos;
     int y_pos;
+    int visited;
 };
+
+struct Position* PtrPos;
 
 Search_for_route()
 {
