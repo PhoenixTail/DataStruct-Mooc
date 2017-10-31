@@ -19,6 +19,4 @@ void shell_ins_sort(int *arr, int num)
             } 
         }
     }
-   
-
 }
