@@ -1,0 +1,5 @@
+bubble
+insert
+shell insert
+merge
+heap
