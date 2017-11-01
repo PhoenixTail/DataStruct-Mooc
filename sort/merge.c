@@ -5,19 +5,37 @@ void merge_sort(int *arr, int num)
     
     if(!temp)  return;
 
-    
+    //mergesort_iter(arr,temp,0,num-1);
+    mergesort_seq(arr, temp, num)
 
     free(temp);
 }
 
-
-void merge_array(int *arr, int *temp, int L, int R, int R_end) 
+/*************************************************/
+void mergesort_seq(int *arr, int *temp, int num)
 {
-    if((R-1-L)/2 > L) {
-        merge_array(arr, temp, L, (R-1)/2, R-1);
+    int div_len = 2;
+    int idx = 0;
+
+    for(div_len = 2; div_len < num ; div_len*=2) {
+        for(idx = 0; idx < num-div_len; idx += div_len) {
+            merge(arr,temp, idx, idx+div_len/2, idx+div_len-1); 
+        }
+        if(num - div_len > div_len/2) {
+            merge(arr,temp, idx, idx+div_len/2, num-1);
+        } 
     }
-    if((R_end-R)/2 > R) {
-        merge_array(arr, temp, R, (R_end-R)/2, R-1);
+}
+
+
+/*************************************************/
+void mergesort_iter(int *arr, int *temp, int L, int R)
+{
+    int center = (R-L)/2;
+    if(L<R) {
+        mergesort_iter(arr,temp,L,center);
+        mergesort_iter(arr,temp,center+1,R);
+        merge(arr, temp, L, center+1, R);
     }
 }
 
@@ -40,7 +58,7 @@ void merge(int *arr, int *temp, int L, int R, int R_end)
         while(k<=R_end)
             temp[k++] = arr[i++];
 
-    if(j < (R_end-1))
+    if(j <= (R_end-1))
         while(k<=Rend)
             temp[k++] = arr[j++];
 
