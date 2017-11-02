@@ -70,19 +70,39 @@ void add_to_heap(int data, int * heap, int heap_size)
 void heap_del_sort(int *src, int *heap, int heap_size)
 {
     int i = 0;
-    idx = heap_size - 1;
+    int data = 0;
+    int bigger_idx = 0;
+    int idx = heap_size - 1;
      
     while(idx>0) {
         swap(&heap[0],&heap[idx]);
         idx--;
 
-        for(i = 0; i <= idx; i = (i+1)*2-1) {
-           
-            heap[(i+1)*2-1])
-                if(heap[i]<hea)
-        }
+        data = heap[0];
+        i = 0;
 
-        
+        while(i <= idx) {
+            if((i+1)*2-1 > idx) {
+                break;
+            }
+            else if (i+1)*2 > idx) {
+                bigger_idx = (i+1)*2-1;
+            }
+            else {
+                bigger_idx = heap[(i+1)*2-1] > heap[(i+1)*2] ? (i+1)*2-1: (i+1)*2;
+            }
+
+            if(data < heap[bigger_idx]) {
+                heap[i] = heap[bigger_idx];
+                i = bigger_idx;
+            } else {
+                break;
+            }
+        }
+        heap[i] = data;
+    }
+    for(i = 0; i < heap_size; i++) {
+        src[i] = heap[i];
     }
 }
 
