@@ -1,3 +1,4 @@
+#include "sort_comm.h"
 
 void bubble_sort(int *arr, int num)
 {
@@ -11,20 +12,10 @@ void bubble_sort(int *arr, int num)
             if(arr[i] > arr[i+1]) {
                 swap(&arr[i], &arr[i+1]);
                 sort_ok = 1;
-            }
         }
-
         if(sort_ok == 0)
             break;
     }
-
 }
 
-void swap(int *a, int *b)
-{
-    int temp;
 
-    temp = *a;
-    *a = *b;
-    *b = temp;    
-}
