@@ -1,28 +1,6 @@
-void heap_sort(int *arr, int num)
-{
-    int *temp = (int *)malloc(num*sizeof(int));
-    
-    if(!temp)  return;
-
-    create_heap(arr,temp,num);
-    heap_del_sort(arr,temp,num);
-
-    free(temp);
-}
-
-void create_heap(int *src, int *dst, num)
-{
-    int i = 0;
-    for(i = 0; i < num; i++) {
-        dst[i] = 0;
-    }
-
-    //dst[0] = MAX; dst[0] = MIN;
-
-    for(i = 0; i< num ;i++) {
-        add_to_heap(src[i], dst, i);
-    }
-}
+#include <stdio.h>
+#include <stdlib.h>
+#include "sort_comm.h"
 
 /*数据结构从1开始,heap_size插入前的size*/
 /*
@@ -66,6 +44,20 @@ void add_to_heap(int data, int * heap, int heap_size)
     heap[idx] = data;    
 }
 
+void create_heap(int *src, int *dst, int num)
+{
+    int i = 0;
+    for(i = 0; i < num; i++) {
+        dst[i] = 0;
+    }
+
+    //dst[0] = MAX; dst[0] = MIN;
+
+    for(i = 0; i< num ;i++) {
+        add_to_heap(src[i], dst, i);
+    }
+}
+
 /*假设heap数据结构从下标0开始,heap_size 删除前的heap_size*/
 void heap_del_sort(int *src, int *heap, int heap_size)
 {
@@ -85,7 +77,7 @@ void heap_del_sort(int *src, int *heap, int heap_size)
             if((i+1)*2-1 > idx) {
                 break;
             }
-            else if (i+1)*2 > idx) {
+            else if ((i+1)*2 > idx) {
                 bigger_idx = (i+1)*2-1;
             }
             else {
@@ -105,4 +97,22 @@ void heap_del_sort(int *src, int *heap, int heap_size)
         src[i] = heap[i];
     }
 }
+
+void heap_sort(int *arr, int num)
+{
+    int *temp = (int *)malloc(num*sizeof(int));
+    
+    if(!temp)  return;
+
+    create_heap(arr,temp,num);
+    heap_del_sort(arr,temp,num);
+
+    free(temp);
+}
+
+
+
+
+
+
 

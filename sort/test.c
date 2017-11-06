@@ -36,7 +36,10 @@ void test_main()
 
 
     //bubble_sort(arr, num);
-    insertion_sort(arr, num);
+    //insertion_sort(arr, num);
+	//shell_ins_sort(arr, num);
+	//merge_sort(arr, num);
+    heap_sort(arr, num);
 
     print_sorted(arr, num);
 
