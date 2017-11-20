@@ -1,37 +1,34 @@
+#include <iostream>
+
 class Clock {
 private:
-	int position;
+    int position;
 public:
-	Clock(int position);
-	void Tick();
-	bool IsZero();
-}
+    Clock();
+    void Tick(int times);
+    bool IsZero();
+    void SetPos(int value);
+    int GetPos();
+};
 
-Clock::Clock(int position) {
-	this->position = position;
-}
-
-void Clock::Tick() {
-	position++;
-	position = position%4;
-}
-
-bool Clock::IsZero() {
-	return (positon == 0);
-}
-
-/*********************************/
-Class ClockMatrix {
+class ClockMatrix{
 private:
-	Clock clock[9] = {Clock(0),Clock(0),Clock(0),Clock(0),Clock(0),Clock(0),Clock(0),Clock(0),Clock(0)};
+    int op_1[9] = {1,1,0,1,1,0,0,0,0};
+    int op_2[9] = {1,1,1,0,0,0,0,0,0};
+    int op_3[9] = {0,1,1,0,1,1,0,0,0};
+    int op_4[9] = {1,0,0,1,0,0,1,0,0};
+    int op_5[9] = {0,1,0,1,1,1,0,1,0};
+    int op_6[9] = {0,0,1,0,0,1,0,0,1};
+    int op_7[9] = {0,0,0,1,1,0,1,1,0};
+    int op_8[9] = {0,0,0,0,0,0,1,1,1};
+    int op_9[9] = {0,0,0,0,1,1,0,1,1};
+    int *FindOperation(int op_index);
+
 public:
-    ClockMatrix(char status[3][3]);
-}
+    Clock clock[9];
+    void DoOperation(int op_index, int times);
+    void ClocksSet(int *SetArray);
+};
 
-ClockMatrix::ClockMatrix(char status[3][3]) {
-	int i,j;
 
-	for(i = 0; i < 3; i++) {
-        for(j = 0; j < 
-	}
-}
+

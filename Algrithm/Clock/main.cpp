@@ -1,8 +1,100 @@
 #include <iostream>
-#include "Clock.h"
 #include <climits>
 
 using namespace std;
+
+/*
+void test_main();
+
+int main()
+{
+    test_main();
+    return 0;
+}
+*/
+
+class Clock {
+private:
+    int position;
+public:
+
+    Clock()
+    {
+        position = 0;
+    }
+    void Tick(int times)
+    {
+        position = position+times;
+        position %= 4;
+    }
+    bool IsZero()
+    {
+        return((position%4)==0);
+    }
+    void SetPos(int value)
+    {
+        position = value%4;
+    }
+
+    int GetPos()
+    {
+        return position;
+    }
+};
+
+class ClockMatrix{
+private:
+    int op_1[9] = {1,1,0,1,1,0,0,0,0};
+    int op_2[9] = {1,1,1,0,0,0,0,0,0};
+    int op_3[9] = {0,1,1,0,1,1,0,0,0};
+    int op_4[9] = {1,0,0,1,0,0,1,0,0};
+    int op_5[9] = {0,1,0,1,1,1,0,1,0};
+    int op_6[9] = {0,0,1,0,0,1,0,0,1};
+    int op_7[9] = {0,0,0,1,1,0,1,1,0};
+    int op_8[9] = {0,0,0,0,0,0,1,1,1};
+    int op_9[9] = {0,0,0,0,1,1,0,1,1};
+
+    int *FindOperation(int op_index)
+    {
+        int * op = NULL;
+        switch(op_index) {
+            case 1: op = op_1; break;
+            case 2: op = op_2; break;
+            case 3: op = op_3; break;
+            case 4: op = op_4; break;
+            case 5: op = op_5; break;
+            case 6: op = op_6; break;
+            case 7: op = op_7; break;
+            case 8: op = op_8; break;
+            case 9: op = op_9; break;
+        }
+        return op;
+    }
+
+public:
+    Clock clock[9];
+    void DoOperation(int op_index, int times)
+    {
+        int *op_array = NULL;
+
+        if(times == 0)
+            return;
+
+        op_array = FindOperation(op_index);
+
+        for(int i = 0; i < 9; i++) {
+            if(op_array[i] != 0 )
+                clock[i].Tick(times);
+        }
+    }
+    void ClocksSet(int *SetArray)
+    {
+        for(int i = 0; i < 9 ; i++) {
+            clock[i].SetPos(SetArray[i]);
+        }
+    }
+};
+
 
 int sum(int * arr)
 {
@@ -25,7 +117,7 @@ void print_result(int *arr) {
     }
 }
 
-void test_main()
+int main()
 {
     int init_status[9] = {0};
     int result_op[9] = {0};
@@ -88,5 +180,6 @@ void test_main()
     else
         print_result(min_op);
 
+    return 0;
 }
 
