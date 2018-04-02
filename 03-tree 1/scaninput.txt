@@ -1,0 +1,26 @@
+#include <stdio.h>
+
+int tree1_size
+char tree1[10][3]
+int tree2_size
+char tree2[10][3]
+
+#define PATH stdin
+
+void scan_input()
+{
+    int i = 0; 
+    int j = 0;
+    fsacf(PATH, "%d", &tree1_size);
+    for(i = 0; i < tree1_size; i++) {
+        for(j = 0; j < 3; j++)
+            fscaf(PATH, "%c", &tree1[i][j];
+    }
+
+    fsacf(PATH, "%d", &tree2_size);
+    for(i = 0; i < tree2_size; i++) {
+        for(j = 0; j < 3; j++)
+            fscaf(PATH, "%c", &tree2[i][j];
+    }    
+}
+

@@ -1,0 +1,11 @@
+
+
+int TreeCompare(PtrTree tree1, PtrTree Tree2)
+{
+    if(tree1->data == tree2->data) {
+        
+    }
+    else {
+        
+    }
+}
